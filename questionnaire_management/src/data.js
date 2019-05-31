@@ -1,7 +1,3 @@
-/*
-* @Author: NiceMing
-* @Date:   2018-03-02 18:36:05
-*/
 var list = [
 		{
 			"id": 1,

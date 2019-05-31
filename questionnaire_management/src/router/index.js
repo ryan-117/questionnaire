@@ -9,31 +9,26 @@ import Datepicker from '@/components/Datepicker'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'List',
-      component: List
-    },
-    {
-      path: '/fill/:id',
-      name: 'Fill',
-      component: Fill
-    },
-    {
-      path: '/data/:id',
-      name: 'Data',
-      component: Data
-    },
-    {
-      path: '/edit/:id',
-      name: 'Edit',
-      component: Edit
-    },
-    {
-      path: '/datepicker',
-      name: 'Datepicker',
-      component: Datepicker
-    }
-  ]
+    routes: [{
+            path: '/',
+            name: 'List',
+            component: List
+        }, {
+            path: '/fill/:id',
+            name: 'Fill',
+            component: Fill
+        }, {
+            path: '/data/:id',
+            name: 'Data',
+            component: Data
+        }, {
+            path: '/edit/:id',
+            name: 'Edit',
+            component: Edit
+        }, {
+            path: '/datepicker',
+            name: 'Datepicker',
+            component: Datepicker
+        }
+    ]
 })
