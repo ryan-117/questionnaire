@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-  	<v-header></v-header>
+  	<top></top>
   	<router-view></router-view>
   </div>
 </template>
 
 <script>
-import vHeader from './components/Header'
+import top from './components/Top'
 
 export default {
   name: 'App',
   components: {
-  	vHeader
+  	top
   }
 }
 </script>

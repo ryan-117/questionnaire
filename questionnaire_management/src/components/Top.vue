@@ -1,5 +1,5 @@
 <template>
-	<header id="header">
+	<header id="top">
 		<h2>问卷管理</h2>
 		<router-link tag="h3" to="/">我的问卷</router-link>
 	</header>
@@ -7,12 +7,12 @@
 
 <script>
 	export default {
-		name: 'header'
+		name: 'top'
 	}
 </script>
 
 <style>
-	#header {
+	#top {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
@@ -21,12 +21,12 @@
 		color: #fff;
 	}
 
-	#header h2 {
+	#top h2 {
 		margin: 0 5rem 0 6rem;
 		font-size: 1.8rem;
 	}
 
-	#header h2:before {
+	#top h2:before {
 		display: inline-block;
 		width: 2rem;
 		height: 2rem;
@@ -39,7 +39,7 @@
 		border-radius: 50%;
 	}
 
-	#header h3 {
+	#top h3 {
 		font-size: 1.2rem;
 		cursor: pointer;
 	}
