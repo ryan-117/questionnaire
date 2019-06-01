@@ -1,7 +1,6 @@
 $white: #fff;
-$orange: #f07600;
-$deep-orange: #c26206;
-$light-orange: #fcf0e5;
+$blue: #22559E;
+$light-blue: #0d60e4;
 $light-green: #60e451;
 $font-color: #555;
 @mixin flex-center {
@@ -10,18 +9,18 @@ $font-color: #555;
 	align-items: center;
 }
 @mixin wrap-background {
-	border-radius: 5px;
+	border-radius: 1rem;
 	background-color: $white;
 	box-shadow: 0 0 5px #ccc;
 }
 @mixin add-btn {
 	cursor: pointer;
 	color: $white;
-	border: 1px solid $deep-orange;
+	border: none;
 	border-radius: 5px;
-	background-color: $orange;
+	background-color: $light-blue;
 	&:hover {
-		box-shadow: 0 0 8px $orange;
+		box-shadow: 0 0 8px $light-blue;
 	}
 }
 @mixin nomal-btn {
@@ -38,9 +37,9 @@ $font-color: #555;
 		background-color: $white;
 		&:hover {
 			color: $white;
-			border-color: $deep-orange;
-			background-color: $orange;
-			box-shadow: 0 0 8px $orange;
+            border-color: $light-blue;
+			background-color: $light-blue;
+			box-shadow: 0 0 8px $light-blue;
 		}
 	}
 }
@@ -54,7 +53,7 @@ $font-color: #555;
 		border-radius: 50%;
 		background-color: #eee;
 		&.checked {
-			border: .4rem solid $orange;
+			border: .4rem solid $blue;
 		}
 	}
 }
@@ -82,12 +81,14 @@ $font-color: #555;
 			padding: 0 2rem;
 			font-weight: 700;
 			line-height: 4rem;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
 			background-color: #f2f2f2;
 			justify-content: space-between;
 			a {
 				color: #555;
 				&:hover {
-					color: $orange;
+					color: $blue;
 				}
 			}
 		}
@@ -102,8 +103,8 @@ $font-color: #555;
 				margin: .5rem;
 				&:nth-of-type(1) {
 					color: #fff;
-					border-color: $deep-orange;
-					background-color: $orange;
+					border-color: $light-blue;
+					background-color: $blue;
 				}
 				&:nth-of-type(2) {
 					color: $font-color;
@@ -141,7 +142,7 @@ $font-color: #555;
 		cursor: pointer;
 	}
 	span:hover {
-		color: $orange;
+		color: $blue;
 	}
 	p, input {
 		width: 50rem;
@@ -150,7 +151,7 @@ $font-color: #555;
 		font-weight: 700;
 	}
 	p:hover {
-		background-color: $light-orange;
+		background-color: $light-blue;
 	}
 	input {
 		display: none;
@@ -174,8 +175,11 @@ $font-color: #555;
 		position: relative;
 		margin: 1rem 0;
 		padding: 1rem 2rem;
+        border-radius: 1rem;
 		&:hover {
-			background-color: $light-orange;
+			border-color: #fff;
+			background-color: #fff;
+			box-shadow: 0 0 8px $light-blue;
 			.operat-list {
 				display: flex;
 			}
@@ -241,7 +245,7 @@ $font-color: #555;
 				cursor: pointer;
 			}
 			li:hover {
-				color: $orange;
+				color: $blue;
 			}
 		}
 		& > ul {
@@ -269,7 +273,7 @@ $font-color: #555;
 			margin-right: 1rem;
 			cursor: pointer;
 			&:hover {
-				color: $orange;
+				color: $blue;
 			}
 		}
 	}
@@ -331,8 +335,8 @@ $font-color: #555;
 			margin: 0 1rem;
 			&:nth-of-type(2) {
 				color: #fff;
-				border-color: $deep-orange;
-				background-color: $orange;
+				border-color: $light-blue;
+				background-color: $blue;
 			}
 			&:nth-of-type(1) {
 				color: $font-color;

@@ -31,9 +31,9 @@
 					</section>
 				</div>
 			</div>
-			<footer>
-				<router-link tag="p" to="/" id="backBtn">返 回</router-link>
-			</footer>
+			<div class="data-back">
+				<router-link tag="p" to="/" id="backBtn"><span>返 回</span></router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -145,10 +145,16 @@ export default {
 		background-color: #fff;
 	}
 }
+    .data-back{
+        margin-top: 1rem;
+        width: 3rem;
+		padding: 1rem 3rem;
+		@include add-btn;
+	}
 .qu-content {
 	.qu-item {
 		display: flex;
-		border: 2px solid #ccc;
+		border: 1px solid #e2e2e2;
 		&:hover {
 			background-color: #fff;
 		}
@@ -182,7 +188,7 @@ export default {
 				display: block;
 				width: 60%;
 				height: 100%;
-				background-color: $orange;
+				background-color: $blue;
 			}
 			.scaleNum {
 				position: absolute;

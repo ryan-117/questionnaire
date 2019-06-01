@@ -88,14 +88,16 @@ export default {
         content: "";
         border: {
             right: 0.5rem solid transparent;
-            bottom: 0.5rem solid $orange;
+            bottom: 0.5rem solid $blue;
             left: 0.5rem solid transparent;
         }
     }
 }
 header {
     color: $white;
-    background-color: $orange;
+    background-color: $blue;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .date-title {
     display: flex;
@@ -123,6 +125,9 @@ header {
 }
 .week-title,
 .date-content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px;
     ul {
         display: flex;
     }
@@ -152,7 +157,8 @@ header {
             cursor: pointer;
             color: #666;
             &:hover {
-                background-color: $light-orange;
+                background-color: $light-blue;
+                color: #fff
             }
         }
     }

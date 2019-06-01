@@ -272,7 +272,7 @@ export default {
                 item.title = `问卷调查${item.id}`;
                 item.state = 0;
                 item.stateName = "未发布";
-                item.time = "2018-12-31";
+                item.time = "2019-06-01";
                 item.questions = [];
                 this.quData = item;
             } else {
