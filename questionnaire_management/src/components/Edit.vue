@@ -131,7 +131,7 @@
                     <p class="qu-type" :class="{ expand: isAdding }">
                         <span @click="addType('radio')">单选题</span>
                         <span @click="addType('checkbox')">多选题</span>
-                        <span @click="addType('textarea')">文本题</span>
+                        <span @click="addType('textarea')">简答题</span>
                     </p>
 
                     <p class="add-btn" @click="isAdding = !isAdding">

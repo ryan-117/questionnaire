@@ -8,9 +8,9 @@
 		<div class="list-wrapper" v-else>
 			<ul>
 				<li></li>
-				<li>标题</li>
+				<li>问卷标题</li>
 				<li>截止时间</li>
-				<li>状态</li>
+				<li>问卷状态</li>
 				<li>
 					操作
 					<p

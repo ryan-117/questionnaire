@@ -4,7 +4,6 @@
 			<header>
 				<router-link tag="span" to="/">&lt; 返回</router-link>
 				<p>{{ quData.title }}</p>
-				<p id="data-tip">(随机生成的数据 可能会有不准确)</p>
 			</header>
 			<div class="qu-content">
 				<div class="qu-item" v-for="(item, index) in quData.questions">
@@ -197,11 +196,5 @@ export default {
 			}
 		}
 	}
-}
-#data-tip {
-	height: 1rem;
-	margin: -2.2rem auto 0 auto;
-	font-size: 1.2rem;
-	font-weight: 400;
 }
 </style>
