@@ -94,65 +94,75 @@ export default {
 			question.checkedIndex = idx
 		},
         submitQuestionnaire() {
-            alert("已完成问卷")
+            this.$router.push({name: "complete"})
         }
 	},
 	created() {
 		this.questions = [{
-			title: "单选题1",
+			title: "您的性别",
 			type: "single",
 			checkContent: [{
-				content: "选项"
+				content: "男"
 			}, {
-				content: "选项"
-			}, {
-				content: "选项"
+				content: "女"
 			}],
 			checkedIndex: -1
 		}, {
-			title: "选择一下",
+			title: "你喜欢的风格",
 			type: "multi",
 			checkContent: [{
-				content: "选项",
+				content: "传统古典",
 				checked: false
 			}, {
-				content: "选项",
+				content: "成熟稳重",
 				checked: false
 			}, {
-				content: "选项",
+				content: "时尚动感",
+				checked: false
+			}, {
+				content: "小清新",
+				checked: false
+			}, {
+				content: "爱好多变",
 				checked: false
 			}]
 		}, {
-			title: "单选题2",
+			title: "你喜欢的色调",
 			type: "single",
 			checkContent: [{
-				content: "选项"
+				content: " 冷色系"
 			}, {
-				content: "选项"
+				content: "暖色系"
 			}, {
-				content: "选项"
+				content: "都可以"
 			}],
 			checkedIndex: -1
 		}, {
-			title: "再选择一下",
+			title: "你最常使用的手机功能应用有哪些？",
 			type: "multi",
 			checkContent: [{
-				content: "选项",
+				content: "通话/短信",
 				checked: false
 			}, {
-				content: "选项",
+				content: "社交app",
 				checked: false
 			}, {
-				content: "选项",
+				content: "新闻浏览",
+				checked: false
+			}, {
+				content: "拍照/视频",
+				checked: false
+			}, {
+				content: "其他",
 				checked: false
 			}]
 		}, {
-			title: "评个分呗（1分极不满意，5分非常满意）",
+			title: "您对当前使用的手机满意吗？（1分极不满意，5分非常满意）",
 			type: "score",
 			checkContent: [1, 2, 3, 4, 5],
 			checkedIndex: -1
 		}, {
-			title: "简答题",
+			title: "你还有什么想说的吗？",
 			type: "shortDesc"
 		}]
 	}
@@ -183,7 +193,6 @@ export default {
 		background-color: @white;
 		border-radius: 0.05rem;
 		.question-title {
-			height: 0.3rem;
 			line-height: 0.3rem;
 			font-size: 0.14rem;
 			color: #333;
