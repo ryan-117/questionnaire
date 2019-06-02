@@ -4,6 +4,6 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
     NODE_ENV: '"development"',
-    ROUTER_MODE: '"history"',
+    ROUTER_MODE: '"hash"',
     ROOT_DIRNAME: '"/"'
 })

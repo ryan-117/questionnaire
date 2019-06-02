@@ -6,6 +6,6 @@ import complete from "../view/Complete.vue";  // 完成页
 export default [
     { path: '*', component: welcome },
     { path: process.env.ROOT_DIRNAME, name: "/", meta: { index: 0, requireLogin: false }, component: welcome },
-    { path: "/index", name: "index", meta: { index: 0, requireLogin: false }, component: index },
-    { path: "/complete", name: "complete", meta: { index: 0, requireLogin: false }, component: complete },
+    { path: "/questionnaire/index", name: "index", meta: { index: 0, requireLogin: false }, component: index },
+    { path: "/questionnaire/complete", name: "complete", meta: { index: 0, requireLogin: false }, component: complete },
 ];

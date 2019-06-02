@@ -21,7 +21,7 @@ const router = new VueRouter({
     routes: routes,
 });
 let vm = new Vue({
-    el: '#hfgo',
+    el: '#questionnaire',
     router,
     ...App
 })
