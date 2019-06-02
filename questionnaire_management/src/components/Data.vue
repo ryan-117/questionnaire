@@ -8,7 +8,9 @@
 			<div class="qu-content">
 				<div class="qu-item" v-for="(item, index) in quData.questions">
 					<section class="qu-data">
-						<h3>{{ `Q${index + 1}&nbsp;&nbsp;&nbsp;${item.topic}`}}</h3>
+						<h3>
+							{{ `Q${index + 1}&nbsp;&nbsp;&nbsp;${item.topic}` }}
+						</h3>
 						<template v-if="item.type !== 'textarea'">
 							<p v-for="option in item.options">{{ option }}</p>
 						</template>
@@ -17,13 +19,25 @@
 					<section class="ans-data">
 						<h4>数据占比</h4>
 						<template v-if="item.type === 'radio'">
-							<p class="outerBar" v-for="(option, optIndex) in item.options">
-								<span class="innerBar" :style="{width: randomScale()}"></span>
+							<p
+								class="outerBar"
+								v-for="(option, optIndex) in item.options"
+							>
+								<span
+									class="innerBar"
+									:style="{ width: randomScale() }"
+								></span>
 								<span class="scaleNum"></span>
 							</p>
 						</template>
-						<p class="outerBar" v-else-if="item.type === 'textarea'">
-							<span class="innerBar" :style="{width: randomScale()}"></span>
+						<p
+							class="outerBar"
+							v-else-if="item.type === 'textarea'"
+						>
+							<span
+								class="innerBar"
+								:style="{ width: randomScale() }"
+							></span>
 							<span class="scaleNum"></span>
 						</p>
 						<p class="echart" v-else></p>
@@ -31,7 +45,9 @@
 				</div>
 			</div>
 			<div class="data-back">
-				<router-link tag="p" to="/" id="backBtn"><span>返 回</span></router-link>
+				<router-link tag="p" to="/" id="backBtn"
+					><span>返 回</span></router-link
+				>
 			</div>
 		</div>
 	</div>
@@ -96,30 +112,30 @@ export default {
 		renderEchart(element) {
 			let myChart = echarts.init(element);
 			let option = {
-				tooltip : {
+				tooltip: {
 					trigger: 'item',
 					formatter: "{a} <br/>{b} : {c} ({d}%)"
 				},
-				series : [
-				{
-					name: '选择人数',
-					type: 'pie',
-					radius : '60%',
-					center: ['30%', '50%'],
-					data:[
-					{value:20, name:'选项1'},
-					{value:30, name:'选项2'},
-					{value:40, name:'选项3'},
-					{value:50, name:'选项4'}
-					],
-					itemStyle: {
-						emphasis: {
-							shadowBlur: 10,
-							shadowOffsetX: 0,
-							shadowColor: 'rgba(0, 0, 0, 0.5)'
+				series: [
+					{
+						name: '选择人数',
+						type: 'pie',
+						radius: '60%',
+						center: ['30%', '50%'],
+						data: [
+							{ value: 20, name: '选项1' },
+							{ value: 30, name: '选项2' },
+							{ value: 40, name: '选项3' },
+							{ value: 50, name: '选项4' }
+						],
+						itemStyle: {
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
 						}
 					}
-				}
 				]
 			};
 			myChart.setOption(option);
@@ -138,18 +154,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../style/public.scss';
+@import "../style/public.scss";
 .qu-wrap > header {
 	p:hover {
 		background-color: #fff;
 	}
 }
-    .data-back{
-        margin-top: 1rem;
-        width: 3rem;
-		padding: 1rem 3rem;
-		@include add-btn;
-	}
+.data-back {
+	margin-top: 12px;
+	width: 48px;
+	padding: 12px 36px;
+	@include add-btn;
+}
 .qu-content {
 	.qu-item {
 		display: flex;
@@ -157,30 +173,31 @@ export default {
 		&:hover {
 			background-color: #fff;
 		}
-		.qu-data, .ans-data {
+		.qu-data,
+		.ans-data {
 			display: flex;
 			flex-direction: column;
 			& > * {
-				height: 2rem;
+				height: 24px;
 			}
 			.echart {
-				height: 20rem;
+				height: 240px;
 			}
 		}
 		.qu-data {
 			flex: 3;
 			p {
-				margin: 1rem 0 0 3rem;
+				margin: 12px 0 0 36px;
 			}
 		}
 		.ans-data {
 			flex: 2;
 			.outerBar {
 				position: relative;
-				width: 20rem;
-				height: 1.2rem;
-				margin: 1.6rem 0 0 0;
-				font-size: 1.2rem;
+				width: 240px;
+				height: 14px;
+				margin: 19px 0 0 0;
+				font-size: 14px;
 				border: 1px solid #ccc;
 			}
 			.innerBar {
@@ -192,7 +209,7 @@ export default {
 			.scaleNum {
 				position: absolute;
 				top: 0;
-				right: -4rem;
+				right: -48px;
 			}
 		}
 	}

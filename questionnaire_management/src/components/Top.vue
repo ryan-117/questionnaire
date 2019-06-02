@@ -11,27 +11,27 @@ $blue: #22559E;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 5rem;
+	height: 60px;
 	background-color: $blue;
 	color: #fff;
 	h2 {
-		margin: 0 5rem 0 6rem;
-		font-size: 1.8rem;
-        height: 2.5rem;
-        line-height: 2.5rem;
+		margin: 0 60px 0 72px;
+		font-size: 21px;
+        height: 30px;
+        line-height: 30px;
 		span {
 			display: inline-block;
-			width: 2rem;
-			height: 2rem;
-			line-height: 2rem;
-			margin-right: 0.5rem;
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+			margin-right: 6px;
             background: url("../images/icon.png") no-repeat;
             background-size: contain;
             vertical-align: middle;
 		}
 	}
 	h3 {
-		font-size: 1.2rem;
+		font-size: 21px;
 		cursor: pointer;
 	}
 }

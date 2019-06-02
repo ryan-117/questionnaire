@@ -204,10 +204,10 @@ export default {
 }
 #submitBtn,
 #backBtn {
-    width: 8rem;
-    height: 3rem;
+    width: 96px;
+    height: 36px;
     margin: 0 auto;
-    line-height: 3rem;
+    line-height: 36px;
     cursor: pointer;
     text-align: center;
     color: #fff;

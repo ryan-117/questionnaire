@@ -1,18 +1,18 @@
 <template>
-  <div id="app">
-  	<top></top>
-  	<router-view></router-view>
-  </div>
+	<div id="app">
+		<top></top>
+		<router-view></router-view>
+	</div>
 </template>
 
 <script>
 import top from './components/Top'
 
 export default {
-  name: 'App',
-  components: {
-  	top
-  }
+	name: 'App',
+	components: {
+		top
+	}
 }
 </script>
 
@@ -20,10 +20,11 @@ export default {
 @import "style/reset";
 
 #app {
-  min-width: 110rem;
-  height: 100%;
-  font-family: arial;
-  background-color: #efefef;
-  overflow: auto;
+	min-width: 1200px;
+    width: 100%;
+	height: 100vh;
+	font-family: arial;
+	background-color: #efefef;
+	overflow: auto;
 }
 </style>

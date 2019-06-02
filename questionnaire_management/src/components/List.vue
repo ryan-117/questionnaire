@@ -179,16 +179,16 @@ export default {
 <style scoped lang="scss">
 @import "../style/public.scss";
 .container {
-	width: 100rem;
-	margin: 6rem auto;
+	width: 1200px;
+	margin: 72px auto;
 	color: #555;
 }
 .add-wrapper {
-	height: 20rem;
+	height: 240px;
 	@include flex-center;
 	@include wrap-background;
 	p {
-		padding: 1rem 3rem;
+		padding: 12px 36px;
 		@include add-btn;
 	}
 }
@@ -198,17 +198,17 @@ export default {
 	@include check-icon;
 	ul {
 		display: flex;
-		height: 6rem;
-		line-height: 6rem;
+		height: 72px;
+		line-height: 72px;
 		@include nomal-btn;
 		&:nth-of-type(1) {
 			background-color: #f2f2f2;
 			p {
 				display: inline-block;
-				width: 10rem;
-				height: 3rem;
-				margin-left: 11rem;
-				line-height: 3rem;
+				width: 120px;
+				height: 36px;
+				margin-left: 132px;
+				line-height: 36px;
 				text-align: center;
 				@include add-btn;
 			}
@@ -244,8 +244,8 @@ export default {
 	}
 	div {
 		display: flex;
-		height: 7rem;
-		line-height: 6rem;
+		height: 84px;
+		line-height: 72px;
 		@include nomal-btn();
 		p {
 			&:nth-of-type(1) {
@@ -255,7 +255,7 @@ export default {
 			&:nth-of-type(2) {
 				flex: 14;
 				span {
-					margin-left: 2rem;
+					margin-left: 24px;
 				}
 			}
 		}

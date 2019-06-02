@@ -31,6 +31,7 @@
                         nowEditing: curIndex === index && topicEditing,
                         optEditing: curIndex === index
                     }"
+                    :key="index"
                 >
                     <h3
                         @click="
@@ -115,10 +116,10 @@
                         </li>
                     </ul>
                     <ul class="operat-list">
-                        <li v-if="index !== 0" @click="moveUp(index)">上移</li>
+                        <li v-if="index !== 0" @click="moveUp(index, questions)">上移</li>
                         <li
                             v-if="index !== questions.length - 1"
-                            @click="moveDown(index)"
+                            @click="moveDown(index, questions)"
                         >
                             下移
                         </li>

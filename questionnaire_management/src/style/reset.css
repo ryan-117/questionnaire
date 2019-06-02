@@ -6,7 +6,6 @@ body {font-family: sans-serif;-webkit-font-smoothing: antialiased;}
 *:focus { outline: none;}
 /* 默认不显示下划线，保持页面简洁 */
 ins,a { text-decoration: none;}
-input { -webkit-appearance: none;outline:none;}
 input,select,textarea {font-size: 100%;}
 /* 去掉各 Table  cell 的边距并让其边重合 */
 table { border-collapse: collapse;border-spacing: 0;}

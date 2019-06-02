@@ -77,9 +77,9 @@ export default {
 @import "../style/public.scss";
 
 .date-container {
-    width: 24rem;
-    height: 24rem;
-    font-size: 1.2rem;
+    width: 288px;
+    height: 288px;
+    font-size: 14px;
     &:before {
         display: block;
         width: 0;
@@ -87,9 +87,9 @@ export default {
         margin: 0 auto;
         content: "";
         border: {
-            right: 0.5rem solid transparent;
-            bottom: 0.5rem solid $blue;
-            left: 0.5rem solid transparent;
+            right: 6px solid transparent;
+            bottom: 6px solid $blue;
+            left: 6px solid transparent;
         }
     }
 }
@@ -101,9 +101,9 @@ header {
 }
 .date-title {
     display: flex;
-    height: 3rem;
-    margin: 0 1.5rem;
-    font-size: 1.4rem;
+    height: 36px;
+    margin: 0 18px;
+    font-size: 16px;
     font-weight: 700;
     justify-content: space-between;
     align-items: center;
@@ -113,14 +113,14 @@ header {
         width: 0;
         height: 0;
         cursor: pointer;
-        border-top: 0.5rem solid transparent;
-        border-bottom: 0.5rem solid transparent;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
     }
     .left-arrow {
-        border-right: 0.5rem solid $white;
+        border-right: 6px solid $white;
     }
     .right-arrow {
-        border-left: 0.5rem solid $white;
+        border-left: 6px solid $white;
     }
 }
 .week-title,
@@ -143,8 +143,8 @@ header {
         left: 1px solid #ccc;
     }
     ul {
-        height: 3.2rem;
-        line-height: 3.2rem;
+        height: 38px;
+        line-height: 38px;
         color: #ddd;
         border-bottom: 1px solid #eee;
         background-color: $white;
