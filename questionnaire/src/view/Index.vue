@@ -3,7 +3,7 @@
 		<div class="title">{{ qsData.title }}</div>
 		<div
 			class="question"
-			v-for="(question, index) in qsData.questions"
+			v-for="(question, index) in questions"
 			:key="index"
 		>
 			<!-- 单选题 -->
@@ -15,7 +15,7 @@
 					<div
 						class="check-item"
 						v-for="(item, idx) in question.options"
-						@click="selectSingleItem(question, idx)"
+						@click="selectSingleItem(question, idx, index)"
 						:key="idx"
 					>
 						<span
@@ -42,7 +42,7 @@
 							class="multi-check"
 							:class="{ checked: item.checked }"
 						></span>
-						<p>{{ item.content }}{{ idx + 1 }}</p>
+						<p>{{ item.title }}</p>
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,11 @@
 					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
-					<textarea placeholder="写点什么吧"></textarea>
+					<textarea
+						@focus="focusTextarea(question, index)"
+						v-model="question.answer"
+						placeholder="写点什么吧"
+					></textarea>
 				</div>
 			</div>
 		</div>
@@ -90,29 +94,28 @@ export default {
 	},
 	methods: {
 		selectMultiItem(item) { // 多选
-			item.checked = !item.checked
+			item.checked = !item.checked;
+			this.$forceUpdate();
 		},
-		selectSingleItem(question, idx) { // 单选
-			console.log(question.checkedIndex)
-			console.log(idx)
+		selectSingleItem(question, idx, index) { // 单选
 			question.checkedIndex = idx
-			console.log(question.checkedIndex)
-			console.log("---")
+			this.$forceUpdate();
 		},
 		selectScoreItem(question, idx) { // 评分
 			question.chooseNum = idx
 		},
+		focusTextarea(question, index) {
+			this.questions[index].answer = question.answer
+		},
 		submitQuestionnaire() {
-			this.$router.push({ name: "complete" })
+			console.log(this.qsData)
+			// this.$router.push({ name: "complete" })
 		},
 		getQsData() {
 			let id = this.$route.query.id;
 			this.$axios({
 				method: 'get',
-				url: `/questionnaire/questionnaire/${id}`,
-				headers: {
-					"Authorization": "Bearer 770ac260-ed16-4f58-9af4-3d6b268a97e1"
-				}
+				url: `/questionnaire/questionnaire/loadQsnaire/${id}`
 			}).then(({ data }) => {
 				this.qsData = data.data;
 				this.questions = data.data.questions.map(item => {
@@ -127,96 +130,16 @@ export default {
 		}
 	},
 	created() {
-		// this.getQsData()
-		let data = {
-			"code": 0,
-			"msg": "success",
-			"data": {
-				"id": 29,
-				"title": "0614",
-				"description": null,
-				"time": "2019-6-14",
-				"state": 1,
-				"questions": [
-					{
-						"topic": "234234",
-						"sort": 1,
-						"type": "radio",
-						"isMandatory": null,
-						"answer": null,
-						"options": [
-							{
-								"id": null,
-								"title": "选2",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "选1",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "温热翁12343e32",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "选4",
-								"chooseNum": null
-							}
-						]
-					},
-					{
-						"topic": "duoxuan1",
-						"sort": 2,
-						"type": "checkbox",
-						"isMandatory": null,
-						"answer": null,
-						"options": [
-							{
-								"id": null,
-								"title": "选4",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "选1",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "选2",
-								"chooseNum": null
-							},
-							{
-								"id": null,
-								"title": "选3",
-								"chooseNum": null
-							}
-						]
-					},
-					{
-						"topic": "文本题jianda ",
-						"sort": 3,
-						"type": "textarea",
-						"isMandatory": 0,
-						"answer": null,
-						"options": null
-					}
-				]
-			}
-		}
-		this.qsData = data.data;
-		this.questions = data.data.questions.map(item => {
-			if (item.type == "radio") {
-				item.checkedIndex = -1
-			} else if (item.type == "checkbox") {
-				item.options.checked = false
-			}
-			return item
-		})
-        console.log(JSON.stringify(this.questions,null,4))
+		this.getQsData();
+		// let ans = {
+		// 	qsAnswers: 1,
+		// 	qsAnswers: [{
+		// 		questionId: 1,
+		// 		isMandatory: 1,
+		// 		type: 'radio',
+		// 		answer: ''
+		// 	}]
+		// }
 	}
 }
 </script>

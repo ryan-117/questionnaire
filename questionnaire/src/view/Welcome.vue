@@ -26,10 +26,7 @@ export default {
 			let id = this.$route.query.id;
 			this.$axios({
                 method: 'get',
-                url: `/questionnaire/questionnaire/${id}`,
-                headers: {
-                    "Authorization": "Bearer 770ac260-ed16-4f58-9af4-3d6b268a97e1"
-                }
+                url: `/questionnaire/questionnaire/loadQsnaire/${id}`
             }).then(({ data })=> {
 				this.qsData = data.data;
 			})
