@@ -1,49 +1,53 @@
 <template>
 	<div id="home">
-		<div class="title">问卷调查</div>
+		<div class="title">{{ qsData.title }}</div>
 		<div
 			class="question"
-			v-for="(question, index) in questions"
+			v-for="(question, index) in qsData.questions"
 			:key="index"
 		>
 			<!-- 单选题 -->
-			<div v-if="question.type == 'single'">
+			<div v-if="question.type == 'radio'">
 				<p class="question-title">
-					{{ index + 1 }}. {{ question.title }}
+					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
 					<div
 						class="check-item"
-						v-for="(item, idx) in question.checkContent"
+						v-for="(item, idx) in question.options"
 						@click="selectSingleItem(question, idx)"
 						:key="idx"
 					>
-						<span class="single-check"
-							:class="{ checked: idx == question.checkedIndex }"
+						<span
+							class="single-check"
+							:class="{ checked: idx === question.checkedIndex }"
+						></span>
+						<p>{{ item.title }}</p>
+					</div>
+				</div>
+			</div>
+			<!-- 多选题 -->
+			<div v-if="question.type == 'checkbox'">
+				<p class="question-title">
+					{{ index + 1 }}. {{ question.topic }}（多选题）
+				</p>
+				<div class="check-content">
+					<div
+						class="check-item"
+						v-for="(item, idx) in question.options"
+						@click="selectMultiItem(item)"
+						:key="idx"
+					>
+						<span
+							class="multi-check"
+							:class="{ checked: item.checked }"
 						></span>
 						<p>{{ item.content }}{{ idx + 1 }}</p>
 					</div>
 				</div>
 			</div>
-			<!-- 多选题 -->
-			<div v-if="question.type == 'multi'">
-				<p class="question-title">
-					{{ index + 1 }}. {{ question.title }}（多选题）
-				</p>
-				<div class="check-content">
-					<div
-						class="check-item"
-						v-for="(item, idx) in question.checkContent"
-						@click="selectMultiItem(item)"
-						:key="idx"
-					>
-						<span class="multi-check" :class="{ checked: item.checked }"></span>
-						<p>{{ item.content }}{{ idx + 1 }}</p>
-					</div>
-				</div>
-			</div>
 			<!-- 评分题 -->
-			<div v-if="question.type == 'score'">
+			<div v-if="question.type == 'rate'">
 				<p class="question-title">
 					{{ index + 1 }}. {{ question.title }}
 				</p>
@@ -62,9 +66,9 @@
 				</div>
 			</div>
 			<!-- 简答题 -->
-			<div v-if="question.type == 'shortDesc'">
+			<div v-if="question.type == 'textarea'">
 				<p class="question-title">
-					{{ index + 1 }}. {{ question.title }}
+					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
 					<textarea placeholder="写点什么吧"></textarea>
@@ -80,6 +84,7 @@
 export default {
 	data() {
 		return {
+			qsData: {},
 			questions: []
 		}
 	},
@@ -88,83 +93,130 @@ export default {
 			item.checked = !item.checked
 		},
 		selectSingleItem(question, idx) { // 单选
+			console.log(question.checkedIndex)
+			console.log(idx)
 			question.checkedIndex = idx
+			console.log(question.checkedIndex)
+			console.log("---")
 		},
 		selectScoreItem(question, idx) { // 评分
-			question.checkedIndex = idx
+			question.chooseNum = idx
 		},
-        submitQuestionnaire() {
-            this.$router.push({name: "complete"})
-        }
+		submitQuestionnaire() {
+			this.$router.push({ name: "complete" })
+		},
+		getQsData() {
+			let id = this.$route.query.id;
+			this.$axios({
+				method: 'get',
+				url: `/questionnaire/questionnaire/${id}`,
+				headers: {
+					"Authorization": "Bearer 770ac260-ed16-4f58-9af4-3d6b268a97e1"
+				}
+			}).then(({ data }) => {
+				this.qsData = data.data;
+				this.questions = data.data.questions.map(item => {
+					if (item.type == "radio") {
+						item.checkedIndex = -1
+					} else if (item.type == "checkbox") {
+						item.options.checked = false
+					}
+					return item
+				})
+			})
+		}
 	},
 	created() {
-		this.questions = [{
-			title: "您的性别",
-			type: "single",
-			checkContent: [{
-				content: "男"
-			}, {
-				content: "女"
-			}],
-			checkedIndex: -1
-		}, {
-			title: "你喜欢的风格",
-			type: "multi",
-			checkContent: [{
-				content: "传统古典",
-				checked: false
-			}, {
-				content: "成熟稳重",
-				checked: false
-			}, {
-				content: "时尚动感",
-				checked: false
-			}, {
-				content: "小清新",
-				checked: false
-			}, {
-				content: "爱好多变",
-				checked: false
-			}]
-		}, {
-			title: "你喜欢的色调",
-			type: "single",
-			checkContent: [{
-				content: " 冷色系"
-			}, {
-				content: "暖色系"
-			}, {
-				content: "都可以"
-			}],
-			checkedIndex: -1
-		}, {
-			title: "你最常使用的手机功能应用有哪些？",
-			type: "multi",
-			checkContent: [{
-				content: "通话/短信",
-				checked: false
-			}, {
-				content: "社交app",
-				checked: false
-			}, {
-				content: "新闻浏览",
-				checked: false
-			}, {
-				content: "拍照/视频",
-				checked: false
-			}, {
-				content: "其他",
-				checked: false
-			}]
-		}, {
-			title: "您对当前使用的手机满意吗？（1分极不满意，5分非常满意）",
-			type: "score",
-			checkContent: [1, 2, 3, 4, 5],
-			checkedIndex: -1
-		}, {
-			title: "你还有什么想说的吗？",
-			type: "shortDesc"
-		}]
+		// this.getQsData()
+		let data = {
+			"code": 0,
+			"msg": "success",
+			"data": {
+				"id": 29,
+				"title": "0614",
+				"description": null,
+				"time": "2019-6-14",
+				"state": 1,
+				"questions": [
+					{
+						"topic": "234234",
+						"sort": 1,
+						"type": "radio",
+						"isMandatory": null,
+						"answer": null,
+						"options": [
+							{
+								"id": null,
+								"title": "选2",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "选1",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "温热翁12343e32",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "选4",
+								"chooseNum": null
+							}
+						]
+					},
+					{
+						"topic": "duoxuan1",
+						"sort": 2,
+						"type": "checkbox",
+						"isMandatory": null,
+						"answer": null,
+						"options": [
+							{
+								"id": null,
+								"title": "选4",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "选1",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "选2",
+								"chooseNum": null
+							},
+							{
+								"id": null,
+								"title": "选3",
+								"chooseNum": null
+							}
+						]
+					},
+					{
+						"topic": "文本题jianda ",
+						"sort": 3,
+						"type": "textarea",
+						"isMandatory": 0,
+						"answer": null,
+						"options": null
+					}
+				]
+			}
+		}
+		this.qsData = data.data;
+		this.questions = data.data.questions.map(item => {
+			if (item.type == "radio") {
+				item.checkedIndex = -1
+			} else if (item.type == "checkbox") {
+				item.options.checked = false
+			}
+			return item
+		})
+        console.log(JSON.stringify(this.questions,null,4))
 	}
 }
 </script>
@@ -230,8 +282,8 @@ export default {
 					border: 0.01rem solid @gray;
 					&.checked {
 						border: none;
-                        background: url("../common/img/check.png") no-repeat;
-                        background-size: contain
+						background: url("../common/img/check.png") no-repeat;
+						background-size: contain;
 					}
 				}
 			}
@@ -266,6 +318,7 @@ export default {
 				color: #666;
 				border-radius: 0.05rem;
 				margin-bottom: 0.1rem;
+				margin-top: 0.1rem;
 				padding: 0.05rem 0.08rem;
 			}
 		}

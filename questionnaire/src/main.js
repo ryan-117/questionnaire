@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 
 Vue.use(VueRouter)
+Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false; //去除生产环境提示
 
