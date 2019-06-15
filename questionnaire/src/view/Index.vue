@@ -135,7 +135,7 @@ export default {
 			let errorOrNot = ansQs.some((ans, index) => {
 				if (ans.type != "textarea") {
 					if (!ans.answer || ans.answer == -1) {
-						this.$toast(`第${index + 1}题尚未回答`);
+						this.$toast(`第${index + 1}题尚未作答`);
                         return true;
 					}
 				}
@@ -156,7 +156,7 @@ export default {
 				if (res.data.code == "0") {
 					this.$router.push({ name: "complete" })
 				} else {
-					this.$toast(res.data.message)
+					this.$toast(res.data.msg)
 				}
 			})
 		},
