@@ -115,12 +115,12 @@ export default {
 				answer.isMandatory = item.isMandatory;
 				answer.type = item.type;
 				if (item.type == "radio") {
-					answer.answer = item.checkedIndex;
+					answer.answer = item.options[item.checkedIndex].id.toString();
 				} else if (item.type == "checkbox") {
 					let checkboxAns = [];
 					item.options.map((opt, idx) => {
 						if (opt.checked) {
-							checkboxAns.push(idx)
+							checkboxAns.push(opt.id)
 						} else {
 							return
 						}
