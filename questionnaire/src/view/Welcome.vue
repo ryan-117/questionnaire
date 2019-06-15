@@ -12,13 +12,20 @@
 				><button>开始答题</button></router-link
 			>
 		</div>
+        <modal :msg="msg" :isShowModal="isShowModal"></modal>
 	</div>
 </template>
 <script>
+import modal from "../components/modal";
 export default {
+    components: {
+        modal
+    },
     data() {
         return {
-            qsData: {}
+            qsData: {},
+            msg: "",
+            isShowModal: false
         }
     },
 	methods: {
@@ -27,9 +34,19 @@ export default {
 			this.$axios({
                 method: 'get',
                 url: `/questionnaire/questionnaire/loadQsnaire/${id}`
-            }).then(({ data })=> {
-				this.qsData = data.data;
-			})
+            }).then( res => {
+                res.data.code = "521"
+				if (res.data.code == "0") {
+                    this.qsData = res.data.data;
+                }else if(res.data.code == "521") {
+                    this.msg = "该问卷未发布或已过期";
+                    this.isShowModal = true
+                } else {
+                    this.$toast(res.data.msg)
+                }
+			}).catch(res => {
+                this.$toast(res.data.msg)
+            })
 		}
 	},
     mounted() {
@@ -54,12 +71,11 @@ export default {
 		}
 		.questiopn-content {
 			margin: 0.1rem auto;
-			max-width: 60%;
+			max-width: 70%;
 			.title {
 				font-size: 0.2rem;
 				color: #333;
 				text-align: center;
-				height: 0.3rem;
 				line-height: 0.3rem;
 				font-weight: 700;
 				margin-bottom: 0.08rem;

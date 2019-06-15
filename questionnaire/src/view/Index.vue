@@ -29,7 +29,7 @@
 			<!-- 多选题 -->
 			<div v-if="question.type == 'checkbox'">
 				<p class="question-title">
-					{{ index + 1 }}. {{ question.topic }}（多选题）
+					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
 					<div
@@ -209,13 +209,12 @@ export default {
 		background-color: @white;
 		border-radius: 0.05rem;
 		.question-title {
-			line-height: 0.4rem;
-			height: 0.4rem;
+			line-height: 0.3rem;
 			font-size: 0.18rem;
 			font-weight: 700;
 			color: #333;
 			width: 3.4rem;
-			margin: 0 auto;
+			margin: 0 auto 0.1rem;
 		}
 		.check-content {
 			width: 3.4rem;
