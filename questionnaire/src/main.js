@@ -8,6 +8,9 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false; //去除生产环境提示
 
 import routes from '@/router' // 路由配置
+// 调用toast插件
+import toast from '@/components/toast/toast'
+Vue.use(toast)
 //主组件
 import App from '@/App'
 // 引入公共js

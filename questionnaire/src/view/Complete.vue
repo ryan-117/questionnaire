@@ -3,7 +3,7 @@
 		<div class="info">
 			<img src="../common/img/icon.png" alt="" />
 			<p>恭喜你，答题已完成</p>
-            <router-link :to="{name:'index'}"><button >重新答题</button></router-link>
+            <!-- <router-link :to="{name:'index'}"><button >重新答题</button></router-link> -->
 		</div>
 	</div>
 </template>

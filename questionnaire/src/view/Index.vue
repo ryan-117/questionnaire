@@ -108,8 +108,57 @@ export default {
 			this.questions[index].answer = question.answer
 		},
 		submitQuestionnaire() {
-			console.log(this.qsData)
-			// this.$router.push({ name: "complete" })
+			let id = this.$route.query.id;
+			let ansQs = this.questions.map(item => {
+				let answer = {};
+				answer.questionId = item.id;
+				answer.isMandatory = item.isMandatory;
+				answer.type = item.type;
+				if (item.type == "radio") {
+					answer.answer = item.checkedIndex;
+				} else if (item.type == "checkbox") {
+					let checkboxAns = [];
+					item.options.map((opt, idx) => {
+						if (opt.checked) {
+							checkboxAns.push(idx)
+						} else {
+							return
+						}
+					})
+					answer.answer = checkboxAns.join();
+				} else if (item.type == "textarea") {
+					answer.answer = item.answer;
+				}
+				return answer
+			})
+			// console.log(JSON.stringify(ansQs, null, 4))
+			let errorOrNot = ansQs.some((ans, index) => {
+				if (ans.type != "textarea") {
+					if (!ans.answer || ans.answer == -1) {
+						this.$toast(`第${index + 1}题尚未回答`);
+                        return true;
+					}
+				}
+			})
+            console.log(errorOrNot)
+            if(errorOrNot) {
+                return;
+            }
+			let ans = {
+				questionnaireId: id,
+				qsAnswers: ansQs
+			}
+			this.$axios({
+				method: 'post',
+				url: `/questionnaire/questionnaire/saveQsnaireAnswer`,
+				data: ans
+			}).then(res => {
+				if (res.data.code == "0") {
+					this.$router.push({ name: "complete" })
+				} else {
+					this.$toast(res.data.message)
+				}
+			})
 		},
 		getQsData() {
 			let id = this.$route.query.id;
@@ -131,15 +180,6 @@ export default {
 	},
 	created() {
 		this.getQsData();
-		// let ans = {
-		// 	qsAnswers: 1,
-		// 	qsAnswers: [{
-		// 		questionId: 1,
-		// 		isMandatory: 1,
-		// 		type: 'radio',
-		// 		answer: ''
-		// 	}]
-		// }
 	}
 }
 </script>
