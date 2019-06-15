@@ -1,6 +1,6 @@
 <template>
 	<div id="home">
-		<div class="title">{{ qsData.title }}</div>
+		<p class="title">{{ qsData.title }}</p>
 		<div
 			class="question"
 			v-for="(question, index) in questions"
@@ -79,7 +79,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="submit">
+		<div v-show="httpComplete" class="submit">
 			<button @click="submitQuestionnaire">提交</button>
 		</div>
 	</div>
@@ -89,7 +89,8 @@ export default {
 	data() {
 		return {
 			qsData: {},
-			questions: []
+			questions: [],
+            httpComplete: false
 		}
 	},
 	methods: {
@@ -136,14 +137,14 @@ export default {
 				if (ans.type != "textarea") {
 					if (!ans.answer || ans.answer == -1) {
 						this.$toast(`第${index + 1}题尚未作答`);
-                        return true;
+						return true;
 					}
 				}
 			})
-            console.log(errorOrNot)
-            if(errorOrNot) {
-                return;
-            }
+			console.log(errorOrNot)
+			if (errorOrNot) {
+				return;
+			}
 			let ans = {
 				questionnaireId: id,
 				qsAnswers: ansQs
@@ -166,6 +167,7 @@ export default {
 				method: 'get',
 				url: `/questionnaire/questionnaire/loadQsnaire/${id}`
 			}).then(({ data }) => {
+                this.httpComplete = true;
 				this.qsData = data.data;
 				this.questions = data.data.questions.map(item => {
 					if (item.type == "radio") {
@@ -187,49 +189,56 @@ export default {
 <style lang="less" scoped>
 @gray: rgba(230, 230, 230, 1);
 @white: #fff;
-@blue: rgba(40, 99, 243, 1);
+@blue: #1ea0fa;
 #home {
 	width: 3.75rem;
-	background-color: @gray;
-	min-height: 100vh;
+	background-color: @white;
 	.title {
-		width: 3.75rem;
-		height: 0.4rem;
+		width: 3.55rem;
+		padding: 0.1rem 0.1rem;
 		line-height: 0.4rem;
-		font-size: 0.18rem;
+		font-size: 0.24rem;
 		font-weight: 700;
-		color: #333;
+		color: @blue;
 		text-align: center;
-		background-color: @white;
+		word-wrap: break-word;
 	}
 	.question {
 		width: 3.6rem;
-		margin: 0.08rem auto;
+		margin: 0.08rem auto 0.25rem;
 		background-color: @white;
 		border-radius: 0.05rem;
 		.question-title {
-			line-height: 0.3rem;
-			font-size: 0.14rem;
+			line-height: 0.4rem;
+			height: 0.4rem;
+			font-size: 0.18rem;
+			font-weight: 700;
 			color: #333;
 			width: 3.4rem;
 			margin: 0 auto;
-			border-bottom: 1px solid @gray;
 		}
 		.check-content {
 			width: 3.4rem;
 			margin: 0 auto;
 			color: #666;
+			border: 1px solid @gray;
+			border-radius: 0.04rem;
 			.check-item {
+				font-size: 0.16rem;
 				display: flex;
 				align-items: center;
-				height: 0.3rem;
+				height: 0.4rem;
+				border-bottom: 1px solid @gray;
+				&:last-child {
+					border-bottom: none;
+				}
 				.single-check {
 					display: block;
 					box-sizing: border-box;
 					width: 0.14rem;
 					height: 0.14rem;
 					border-radius: 0.07rem;
-					margin-right: 0.05rem;
+					margin: 0 0.08rem;
 					border: 0.01rem solid @gray;
 					&.checked {
 						border: 0.04rem solid @blue;
@@ -241,8 +250,8 @@ export default {
 					width: 0.14rem;
 					height: 0.14rem;
 					border-radius: 0.02rem;
-					margin-right: 0.05rem;
-					border: 0.01rem solid @gray;
+					margin: 0 0.08rem;
+					border: 1px solid @gray;
 					&.checked {
 						border: none;
 						background: url("../common/img/check.png") no-repeat;
@@ -280,15 +289,14 @@ export default {
 				font-size: 0.14rem;
 				color: #666;
 				border-radius: 0.05rem;
-				margin-bottom: 0.1rem;
-				margin-top: 0.1rem;
 				padding: 0.05rem 0.08rem;
+				outline: none;
+				border: none;
 			}
 		}
 	}
 	.submit {
 		width: 3.75rem;
-		height: 0.6rem;
 		background-color: #fff;
 		display: flex;
 		justify-content: center;
@@ -302,6 +310,7 @@ export default {
 			font-size: 0.16rem;
 			font-weight: 700;
 			color: #fff;
+            margin: 0.3rem auto 0.8rem;
 		}
 	}
 }
