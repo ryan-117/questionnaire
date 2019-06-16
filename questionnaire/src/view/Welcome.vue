@@ -35,7 +35,6 @@ export default {
                 method: 'get',
                 url: `/questionnaire/questionnaire/loadQsnaire/${id}`
             }).then( res => {
-                res.data.code = "521"
 				if (res.data.code == "0") {
                     this.qsData = res.data.data;
                 }else if(res.data.code == "521") {

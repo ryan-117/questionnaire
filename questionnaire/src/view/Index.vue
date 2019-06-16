@@ -115,8 +115,13 @@ export default {
 				answer.questionId = item.id;
 				answer.isMandatory = item.isMandatory;
 				answer.type = item.type;
+                    console.log(item)
 				if (item.type == "radio") {
-					answer.answer = item.options[item.checkedIndex].id.toString();
+                    if (item.checkedIndex != -1) {
+                        answer.answer = item.options[item.checkedIndex].id.toString();
+                    } else {
+                        answer.answer = -1
+                    }
 				} else if (item.type == "checkbox") {
 					let checkboxAns = [];
 					item.options.map((opt, idx) => {
@@ -132,7 +137,7 @@ export default {
 				}
 				return answer
 			})
-			// console.log(JSON.stringify(ansQs, null, 4))
+			console.log(JSON.stringify(ansQs, null, 4))
 			let errorOrNot = ansQs.some((ans, index) => {
 				if (ans.type != "textarea") {
 					if (!ans.answer || ans.answer == -1) {
