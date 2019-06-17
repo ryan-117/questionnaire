@@ -2,7 +2,7 @@
 	<div id="complete">
 		<div class="info">
 			<img src="../common/img/icon.png" alt="" />
-			<p>恭喜你，答题已完成</p>
+			<p>感谢参与</p>
             <!-- <router-link :to="{name:'index'}"><button >重新答题</button></router-link> -->
 		</div>
 	</div>
