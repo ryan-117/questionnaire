@@ -83,15 +83,22 @@
 		<div v-show="httpComplete" class="submit">
 			<button @click="submitQuestionnaire">提交</button>
 		</div>
+        <modal :msg="msg" :isShowModal="isShowModal"></modal>
 	</div>
 </template>
 <script>
+import modal from "../components/modal";
 export default {
+    components: {
+        modal
+    },
 	data() {
 		return {
 			qsData: {},
 			questions: [],
-            httpComplete: false
+            httpComplete: false,
+            msg: "",
+            isShowModal: false
 		}
 	},
 	methods: {
@@ -172,17 +179,25 @@ export default {
 			this.$axios({
 				method: 'get',
 				url: `/questionnaire/questionnaire/loadQsnaire/${id}`
-			}).then(({ data }) => {
-                this.httpComplete = true;
-				this.qsData = data.data;
-				this.questions = data.data.questions.map(item => {
-					if (item.type == "radio") {
-						item.checkedIndex = -1
-					} else if (item.type == "checkbox") {
-						item.options.checked = false
-					}
-					return item
-				})
+			}).then(res => {
+                if (res.data.code == "0") {
+                    this.qsData = res.data.data;
+                    this.httpComplete = true;
+                    this.qsData = res.data.data;
+                    this.questions = res.data.data.questions.map(item => {
+                        if (item.type == "radio") {
+                            item.checkedIndex = -1
+                        } else if (item.type == "checkbox") {
+                            item.options.checked = false
+                        }
+                        return item
+                    })
+                }else if(res.data.code == "521") {
+                    this.msg = "该问卷未发布或已过期";
+                    this.isShowModal = true
+                } else {
+                    this.$toast(res.data.msg)
+                }
 			})
 		}
 	},
