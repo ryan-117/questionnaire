@@ -1,6 +1,7 @@
 <template>
 	<div id="home">
 		<p class="title">{{ qsData.title }}</p>
+        <div class="description">{{ qsData.description }}</div>
 		<div
 			class="question"
 			v-for="(question, index) in questions"
@@ -205,6 +206,15 @@ export default {
 		font-size: 0.24rem;
 		font-weight: 700;
 		color: @blue;
+		text-align: center;
+		word-wrap: break-word;
+	}
+	.description {
+		width: 3.55rem;
+		padding: 0.1rem 0.1rem;
+		line-height: 0.22rem;
+		font-size: 0.16rem;
+		color: #666;
 		text-align: center;
 		word-wrap: break-word;
 	}
