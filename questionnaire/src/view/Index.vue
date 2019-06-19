@@ -10,6 +10,7 @@
 			<!-- 单选题 -->
 			<div v-if="question.type == 'radio'">
 				<p class="question-title">
+                    <span class="isMandatory" v-if="question.isMandatory">*</span>
 					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
@@ -30,6 +31,7 @@
 			<!-- 多选题 -->
 			<div v-if="question.type == 'checkbox'">
 				<p class="question-title">
+                    <span class="isMandatory" v-if="question.isMandatory">*</span>
 					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
@@ -50,6 +52,7 @@
 			<!-- 评分题 -->
 			<div v-if="question.type == 'rate'">
 				<p class="question-title">
+                    <span class="isMandatory" v-if="question.isMandatory">*</span>
 					{{ index + 1 }}. {{ question.title }}
 				</p>
 				<div class="check-content">
@@ -69,6 +72,7 @@
 			<!-- 简答题 -->
 			<div v-if="question.type == 'textarea'">
 				<p class="question-title">
+                    <span class="isMandatory" v-if="question.isMandatory">*</span>
 					{{ index + 1 }}. {{ question.topic }}
 				</p>
 				<div class="check-content">
@@ -123,12 +127,11 @@ export default {
 				answer.questionId = item.id;
 				answer.isMandatory = item.isMandatory;
 				answer.type = item.type;
-                    console.log(item)
 				if (item.type == "radio") {
                     if (item.checkedIndex != -1) {
                         answer.answer = item.options[item.checkedIndex].id.toString();
                     } else {
-                        answer.answer = -1
+                        answer.answer = "-1"
                     }
 				} else if (item.type == "checkbox") {
 					let checkboxAns = [];
@@ -145,14 +148,12 @@ export default {
 				}
 				return answer
 			})
-			console.log(JSON.stringify(ansQs, null, 4))
+			// console.log(JSON.stringify(ansQs, null, 4))
 			let errorOrNot = ansQs.some((ans, index) => {
-				if (ans.type != "textarea") {
-					if (!ans.answer || ans.answer == -1) {
-						this.$toast(`第${index + 1}题尚未作答`);
-						return true;
-					}
-				}
+                if (ans.isMandatory == 1 && (!ans.answer || ans.answer == -1)) {
+                    this.$toast(`第${index + 1}题尚未作答`);
+                    return true;
+                }
 			})
 			console.log(errorOrNot)
 			if (errorOrNot) {
@@ -245,6 +246,9 @@ export default {
 			color: #333;
 			width: 3.4rem;
 			margin: 0 auto 0.1rem;
+            span {
+                color: red;
+            }
 		}
 		.check-content {
 			width: 3.4rem;
