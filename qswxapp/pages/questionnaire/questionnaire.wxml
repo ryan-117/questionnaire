@@ -1,0 +1,4 @@
+<!-- index.wxml -->
+<view class="container">
+    <text>标题</text>
+</view>

@@ -1,0 +1,9 @@
+<!-- index.wxml -->
+<view class="container">
+    <input class="id-input" type="text" placeholder="请输入id" bindinput="qsIdInput"></input>
+    <button bindtap="getQsdata">搜  索</button>
+    <view class="qs-brief" bindtap="goQsPage">
+        <text class="title">{{ searchResultQsData.title }}</text>
+        <text class="desc">{{ searchResultQsData.description }}</text>
+    </view>
+</view>

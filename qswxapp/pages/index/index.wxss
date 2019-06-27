@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 40rpx;
+}
+.container .id-input {
+  width: 480rpx;
+  height: 80rpx;
+  text-align: center;
+  color: #333;
+  border: 1rpx solid #ccc;
+  border-radius: 40rpx;
+}
+.container button {
+  display: block;
+  width: 480rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #409eff;
+  color: #fff;
+  margin: 80rpx 0;
+}
+.container .qs-brief {
+  width: 690rpx;
+  height: 200rpx;
+}
+.container .qs-brief text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  margin-top: 20rpx;
+}
+.container .qs-brief text.title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+}
+.container .qs-brief text.desc {
+  font-size: 32rpx;
+  color: #666;
+}
