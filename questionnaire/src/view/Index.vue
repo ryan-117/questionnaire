@@ -121,7 +121,7 @@ export default {
 			this.questions[index].answer = question.answer
 		},
 		submitQuestionnaire() {
-			let id = this.$route.query.id;
+			let id = this.$route.params.id;
 			let ansQs = this.questions.map(item => {
 				let answer = {};
 				answer.questionId = item.id;
@@ -176,7 +176,12 @@ export default {
 			})
 		},
 		getQsData() {
-			let id = this.$route.query.id;
+			let id = this.$route.params.id;
+            if(!id) {
+                this.msg = "问卷id不存在";
+                this.isShowModal = true
+                return;
+            }
 			this.$axios({
 				method: 'get',
 				url: `/questionnaire/questionnaire/loadQsnaire/${id}`
@@ -197,7 +202,7 @@ export default {
                     this.msg = "该问卷未发布或已过期";
                     this.isShowModal = true
                 } else {
-                    this.$toast(res.data.msg)
+                    this.$toast(res.data.msg, 5000)
                 }
 			})
 		}
